@@ -1,0 +1,199 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Config.gd" type="Script" id=1]
+[ext_resource path="res://ui/RatesSettings.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/PanelTheme.tres" type="StyleBox" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 756.0, 984.0 ]
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 750.0
+margin_top = 35.0
+margin_right = 990.0
+margin_bottom = 576.0
+custom_styles/panel = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Joystick" type="OptionButton" parent="."]
+margin_left = 757.0
+margin_top = 44.0
+margin_right = 911.0
+margin_bottom = 64.0
+text = "Default Gamepad"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameMode" type="OptionButton" parent="."]
+margin_left = 756.0
+margin_top = 77.0
+margin_right = 910.0
+margin_bottom = 97.0
+text = "Sandbox"
+items = [ "Sandbox", null, false, 0, null, "Race", null, true, 1, null, "Random Continuous", null, true, 2, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="."]
+margin_left = 916.0
+margin_top = 77.0
+margin_right = 983.0
+margin_bottom = 97.0
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Default" type="Button" parent="."]
+margin_left = 916.0
+margin_top = 44.0
+margin_right = 981.0
+margin_bottom = 64.0
+text = "Defaults"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Loading" type="ProgressBar" parent="."]
+margin_left = 757.0
+margin_top = 108.0
+margin_right = 983.0
+margin_bottom = 122.0
+max_value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTMLLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 758.0
+margin_top = 304.0
+margin_right = 983.0
+margin_bottom = 597.0
+bbcode_enabled = true
+bbcode_text = "Hello! In your web browser, this game may take a while to load. It may even say that the tab isn't working correctly or that the page has become unresponsive. Please click \"wait\" if you see this message.
+
+If you would prefer to use a native application, please choose the links below:
+
+Mac OS X: [url=./Quadz_0_1_1_OSX.dmg]Download[/url]
+
+Windows (Need both files):
+[url=./Quadz_0_1_1_Win.pck]Download #1[/url]
+[url=./Quadz_0_1_1_Win.exe]Download #2[/url]"
+text = "Hello! In your web browser, this game may take a while to load. It may even say that the tab isn't working correctly or that the page has become unresponsive. Please click \"wait\" if you see this message.
+
+If you would prefer to use a native application, please choose the links below:
+
+Mac OS X: Download
+
+Windows (Need both files):
+Download #1
+Download #2"
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_left = 758.0
+margin_top = 128.0
+margin_right = 980.0
+margin_bottom = 152.0
+pressed = true
+text = "Motion Blur"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox2" type="CheckBox" parent="."]
+margin_left = 758.0
+margin_top = 152.0
+margin_right = 980.0
+margin_bottom = 176.0
+pressed = true
+text = "Lens Flare"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox3" type="CheckBox" parent="."]
+margin_left = 758.0
+margin_top = 176.0
+margin_right = 980.0
+margin_bottom = 200.0
+pressed = true
+text = "Bloom"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox4" type="CheckBox" parent="."]
+margin_left = 758.0
+margin_top = 200.0
+margin_right = 980.0
+margin_bottom = 224.0
+pressed = true
+text = "Shadows"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox5" type="CheckBox" parent="."]
+margin_left = 758.0
+margin_top = 224.0
+margin_right = 980.0
+margin_bottom = 248.0
+text = "Throttle Centred (Gamepad)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="."]
+margin_left = 764.0
+margin_top = 278.0
+margin_right = 935.0
+margin_bottom = 294.0
+max_value = 60.0
+step = 5.0
+value = 45.0
+rounded = true
+tick_count = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HSlider"]
+margin_left = 189.0
+margin_right = 215.0
+margin_bottom = 14.0
+text = "45°"
+
+[node name="Label2" type="Label" parent="HSlider"]
+margin_left = -2.0
+margin_top = -18.0
+margin_right = 90.0
+margin_bottom = -4.0
+text = "Camera Angle:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rates" parent="." instance=ExtResource( 2 )]
+margin_left = 411.0
+margin_top = 257.0
+margin_right = 411.248
+margin_bottom = 256.8
+
+[connection signal="item_selected" from="Joystick" to="." method="_on_OptionButton_item_selected"]
+[connection signal="item_selected" from="GameMode" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Default" to="." method="_on_Default_pressed"]
+[connection signal="toggled" from="CheckBox5" to="." method="_on_CheckBox5_toggled"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]

@@ -1,0 +1,17 @@
+[remap]
+
+importer="hterrain_packed_texture_importer"
+type="StreamTexture"
+path.s3tc="res://.import/slot3_albedo_bump.packed_tex-3805eaebb69683c9235c73b34e1578c2.s3tc.stex"
+
+[deps]
+
+source_file="res://addons/zylann.hterrain_demo/textures/ground/slot3_albedo_bump.packed_tex"
+dest_files=[ "res://.import/slot3_albedo_bump.packed_tex-3805eaebb69683c9235c73b34e1578c2.s3tc.stex" ]
+
+[params]
+
+compress/mode=2
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true

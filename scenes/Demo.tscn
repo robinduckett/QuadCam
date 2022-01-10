@@ -1,0 +1,149 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://terrains/terrain1/data.hterrain" type="Resource" id=1]
+[ext_resource path="res://addons/zylann.hterrain_demo/textures/ground/slot3_normal_roughness.packed_tex" type="Texture" id=2]
+[ext_resource path="res://addons/zylann.hterrain_demo/textures/ground/slot1_normal_roughness.packed_tex" type="Texture" id=3]
+[ext_resource path="res://addons/zylann.hterrain_demo/textures/ground/slot2_normal_roughness.packed_tex" type="Texture" id=4]
+[ext_resource path="res://addons/zylann.hterrain_demo/textures/ground/slot3_albedo_bump.packed_tex" type="Texture" id=5]
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=6]
+[ext_resource path="res://addons/zylann.hterrain_demo/textures/ground/slot2_albedo_bump.packed_tex" type="Texture" id=7]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=8]
+[ext_resource path="res://terrains/table_mountain_2_1k.hdr" type="Texture" id=9]
+[ext_resource path="res://addons/zylann.hterrain_demo/sea_material.tres" type="Material" id=10]
+[ext_resource path="res://addons/zylann.hterrain_demo/textures/ground/slot1_albedo_bump.packed_tex" type="Texture" id=11]
+[ext_resource path="res://addons/zylann.hterrain_demo/textures/ground/slot0_albedo_bump.packed_tex" type="Texture" id=12]
+[ext_resource path="res://addons/zylann.hterrain_demo/textures/ground/slot0_normal_roughness.packed_tex" type="Texture" id=13]
+[ext_resource path="res://gates/dive_gate.tscn" type="PackedScene" id=15]
+[ext_resource path="res://gates/flag.tscn" type="PackedScene" id=16]
+[ext_resource path="res://gates/gate.tscn" type="PackedScene" id=17]
+[ext_resource path="res://entities/QuadEntity.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/World.gd" type="Script" id=21]
+[ext_resource path="res://scenes/Demo.gd" type="Script" id=22]
+
+[sub_resource type="PanoramaSky" id=2]
+panorama = ExtResource( 9 )
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+ambient_light_sky_contribution = 0.5
+fog_enabled = true
+fog_depth_end = 596.6
+fog_depth_curve = 2.0
+fog_transmit_enabled = true
+fog_height_min = 2.0
+tonemap_mode = 3
+tonemap_exposure = 1.3
+tonemap_white = 1.5
+auto_exposure_scale = 0.2
+auto_exposure_max_luma = 5.0
+auto_exposure_speed = 0.1
+glow_enabled = true
+glow_bloom = 0.15
+glow_bicubic_upscale = true
+glow_high_quality = true
+
+[sub_resource type="PlaneMesh" id=4]
+size = Vector2( 513, 513 )
+
+[sub_resource type="PlaneMesh" id=5]
+size = Vector2( 2048, 2048 )
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 6 )
+mode = 0
+textures = [ [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 5 ) ], [ ExtResource( 13 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ) ] ]
+
+[node name="TerrainDemo" type="Node"]
+script = ExtResource( 22 )
+
+[node name="World" type="Spatial" parent="."]
+script = ExtResource( 21 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="World"]
+transform = Transform( 0.578542, -0.117979, -0.807075, 0.301343, 0.950395, 0.0770842, 0.757946, -0.287803, 0.585395, 44.7451, 14.9375, 196.223 )
+light_bake_mode = 2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource( 3 )
+
+[node name="Sea" type="MeshInstance" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 256, 0, 256 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 10 )
+
+[node name="ExtendedSea" type="Spatial" parent="World"]
+
+[node name="Sea2" type="MeshInstance" parent="World/ExtendedSea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1024.5, 0, 1023.5 )
+mesh = SubResource( 5 )
+material/0 = ExtResource( 10 )
+
+[node name="Sea3" type="MeshInstance" parent="World/ExtendedSea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1023.5, 0, 1536.5 )
+mesh = SubResource( 5 )
+material/0 = ExtResource( 10 )
+
+[node name="Sea4" type="MeshInstance" parent="World/ExtendedSea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1536.5, 0, -511.5 )
+mesh = SubResource( 5 )
+material/0 = ExtResource( 10 )
+
+[node name="Sea5" type="MeshInstance" parent="World/ExtendedSea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -511.5, 0, -1024.5 )
+mesh = SubResource( 5 )
+material/0 = ExtResource( 10 )
+
+[node name="QuadEntity" parent="World" instance=ExtResource( 18 )]
+transform = Transform( 0.974238, 0.0489875, 0.220139, -0.0405178, 0.99826, -0.0428295, -0.221854, 0.0328067, 0.974528, 202.511, 34.2688, 292.288 )
+mode = 0
+mass = 4.89796
+gravity_scale = 3.0
+camera_angle = 45
+thrust = 800.0
+
+[node name="flag" parent="World" instance=ExtResource( 16 )]
+transform = Transform( 0.852576, 0, 0.522603, 0, 1, 0, -0.522603, 0, 0.852576, 253.51, 33.3297, 224.165 )
+
+[node name="flag2" parent="World" instance=ExtResource( 16 )]
+transform = Transform( -0.76892, 0, -0.639345, 0, 1, 0, 0.639345, 0, -0.76892, 236.514, 33.3297, 209.541 )
+
+[node name="flag3" parent="World" instance=ExtResource( 16 )]
+transform = Transform( -0.76892, 0, -0.639345, 0, 1, 0, 0.639345, 0, -0.76892, 265.718, 33.3297, 238.804 )
+
+[node name="Spatial2" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 0.836602, 0, 0.547811, 0, 1, 0, -0.547811, 0, 0.836602, 171.433, 33.7944, 226.038 )
+
+[node name="Spatial3" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 0.836602, 0, 0.547811, 0, 1, 0, -0.547811, 0, 0.836602, 177.873, 33.759, 221.819 )
+
+[node name="Spatial5" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 0.797952, 0, 0.602721, 0, 1, 0, -0.602721, 0, 0.797952, 314.236, 33.2722, 300.113 )
+
+[node name="Spatial6" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 0.797952, 0, 0.602721, 0, 1, 0, -0.602721, 0, 0.797952, 320.393, 33.2722, 295.462 )
+
+[node name="Spatial4" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 195.472, 33.9032, 281.871 )
+
+[node name="SketchUp" parent="World" instance=ExtResource( 15 )]
+transform = Transform( 0.0640255, 0, 0, 0, 0.0640255, 0, 0, 0, 0.0640255, 235.627, 34.8688, 294.632 )
+
+[node name="HTerrain" type="Spatial" parent="World"]
+script = ExtResource( 8 )
+map_scale = Vector3( 2, 2, 2 )
+_terrain_data = ExtResource( 1 )
+chunk_size = 16
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource( 8 )
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = true
+shader_params/u_tile_reduction = Plane( 1, 1, 1, 1 )

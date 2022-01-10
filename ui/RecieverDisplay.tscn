@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/RecieverDisplay.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+margin_right = 531.0
+margin_bottom = 16.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Channel" type="Label" parent="."]
+margin_top = 3.0
+margin_right = 59.0
+margin_bottom = 20.0
+text = "Roll [A]"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = 72.0
+margin_top = 4.0
+margin_right = 527.0
+margin_bottom = 18.0
+min_value = 1000.0
+max_value = 2000.0
+step = 1.0
+value = 1500.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="."]
+margin_left = 72.0
+margin_top = 4.0
+margin_right = 526.0
+margin_bottom = 35.0
+text = "1500
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 536.0
+margin_top = 1.0
+margin_right = 648.0
+margin_bottom = 21.0
+text = "Select Joy Axis"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Invert" type="CheckBox" parent="."]
+margin_left = 659.0
+margin_top = -1.0
+margin_right = 735.0
+margin_bottom = 23.0
+text = "Invert"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="toggled" from="Invert" to="." method="_on_Invert_toggled"]
