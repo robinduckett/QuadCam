@@ -47,7 +47,7 @@ position = Vector2( 221, 4 )
 scale = Vector2( 0.277083, 0.277083 )
 texture = ExtResource( 1 )
 
-[node name="RatePanel" type="Panel" parent="."]
+[node name="ActualRatePanel" type="Panel" parent="."]
 margin_top = 64.0
 margin_right = 328.0
 margin_bottom = 210.0
@@ -56,7 +56,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rc_rate" type="Label" parent="RatePanel"]
+[node name="rc_rate" type="Label" parent="ActualRatePanel"]
 margin_left = 73.0
 margin_top = 3.0
 margin_right = 139.0
@@ -68,7 +68,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rate" type="Label" parent="RatePanel"]
+[node name="rate" type="Label" parent="ActualRatePanel"]
 margin_left = 157.0
 margin_top = 3.0
 margin_right = 216.0
@@ -79,7 +79,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="expo" type="Label" parent="RatePanel"]
+[node name="expo" type="Label" parent="ActualRatePanel"]
 margin_left = 242.0
 margin_top = 3.0
 margin_right = 301.0
@@ -90,7 +90,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Roll" type="Control" parent="RatePanel"]
+[node name="Roll" type="Control" parent="ActualRatePanel"]
 margin_top = 43.0
 margin_right = 316.0
 margin_bottom = 70.0
@@ -98,7 +98,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rc_rate_value" type="SpinBox" parent="RatePanel/Roll"]
+[node name="rc_rate_value" type="SpinBox" parent="ActualRatePanel/Roll"]
 margin_left = 73.0
 margin_right = 147.0
 margin_bottom = 24.0
@@ -108,7 +108,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rate_value" type="SpinBox" parent="RatePanel/Roll"]
+[node name="rate_value" type="SpinBox" parent="ActualRatePanel/Roll"]
 margin_left = 157.0
 margin_right = 231.0
 margin_bottom = 24.0
@@ -118,7 +118,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="expo_value" type="SpinBox" parent="RatePanel/Roll"]
+[node name="expo_value" type="SpinBox" parent="ActualRatePanel/Roll"]
 margin_left = 241.0
 margin_right = 315.0
 margin_bottom = 24.0
@@ -129,7 +129,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="axis_label" type="Label" parent="RatePanel/Roll"]
+[node name="axis_label" type="Label" parent="ActualRatePanel/Roll"]
 margin_left = 4.0
 margin_right = 64.0
 margin_bottom = 24.0
@@ -140,7 +140,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pitch" type="Control" parent="RatePanel"]
+[node name="Pitch" type="Control" parent="ActualRatePanel"]
 margin_top = 75.0
 margin_right = 316.0
 margin_bottom = 102.0
@@ -148,7 +148,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rc_rate_value" type="SpinBox" parent="RatePanel/Pitch"]
+[node name="rc_rate_value" type="SpinBox" parent="ActualRatePanel/Pitch"]
 margin_left = 73.0
 margin_right = 147.0
 margin_bottom = 24.0
@@ -158,7 +158,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rate_value" type="SpinBox" parent="RatePanel/Pitch"]
+[node name="rate_value" type="SpinBox" parent="ActualRatePanel/Pitch"]
 margin_left = 157.0
 margin_right = 231.0
 margin_bottom = 24.0
@@ -168,7 +168,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="expo_value" type="SpinBox" parent="RatePanel/Pitch"]
+[node name="expo_value" type="SpinBox" parent="ActualRatePanel/Pitch"]
 margin_left = 241.0
 margin_right = 315.0
 margin_bottom = 24.0
@@ -179,7 +179,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="axis_label" type="Label" parent="RatePanel/Pitch"]
+[node name="axis_label" type="Label" parent="ActualRatePanel/Pitch"]
 margin_left = 4.0
 margin_right = 64.0
 margin_bottom = 24.0
@@ -190,7 +190,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Yaw" type="Control" parent="RatePanel"]
+[node name="Yaw" type="Control" parent="ActualRatePanel"]
 margin_top = 107.0
 margin_right = 316.0
 margin_bottom = 134.0
@@ -198,7 +198,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rc_rate_value" type="SpinBox" parent="RatePanel/Yaw"]
+[node name="rc_rate_value" type="SpinBox" parent="ActualRatePanel/Yaw"]
 margin_left = 73.0
 margin_right = 147.0
 margin_bottom = 24.0
@@ -208,7 +208,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rate_value" type="SpinBox" parent="RatePanel/Yaw"]
+[node name="rate_value" type="SpinBox" parent="ActualRatePanel/Yaw"]
 margin_left = 157.0
 margin_right = 231.0
 margin_bottom = 24.0
@@ -218,7 +218,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="expo_value" type="SpinBox" parent="RatePanel/Yaw"]
+[node name="expo_value" type="SpinBox" parent="ActualRatePanel/Yaw"]
 margin_left = 241.0
 margin_right = 315.0
 margin_bottom = 24.0
@@ -229,7 +229,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="axis_label" type="Label" parent="RatePanel/Yaw"]
+[node name="axis_label" type="Label" parent="ActualRatePanel/Yaw"]
 margin_left = 4.0
 margin_right = 64.0
 margin_bottom = 24.0

@@ -30,6 +30,7 @@ func set_joy_axis(val):
 	joy_axis = val
 	var joy = get_node("OptionButton")
 	joy.selected = val
+	joy.select(val)
 
 func get_channel():
 	return channel
@@ -48,6 +49,7 @@ func set_inverted(val):
 	var invert = RC.get_inverted()
 	invert[channel_index] = 1 if val else 0
 	RC.set_inverted(invert)
+	$Invert.pressed = val
 	
 	update()
 

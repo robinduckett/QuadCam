@@ -1,5 +1,7 @@
 extends Control
 
+var settings_file = "user://settings.save"
+
 var channels = [
 	"Roll",
 	"Pitch",
@@ -13,7 +15,7 @@ var channels = [
 	# "AUX 6"
 ]
 
-var main_scene = "res://scenes/Demo.tscn"
+var main_scene = "res://scenes/Map.tscn"
 
 var joy_device = 0
 
@@ -55,6 +57,8 @@ func _ready():
 
 	setup_rc()
 
+	load_settings()
+
 func reset_joypads():
 	(get_node("Joystick") as OptionButton).clear()
 
@@ -86,6 +90,13 @@ func _on_Joystick_item_selected(index:int):
 	joy_device = index
 	RC.set_joy_device(joy_device)
 
+func update_rc():
+	$Joystick.selected = RC.get_joy_device()
+
+	for i in range(channels.size()):
+		get_node("rx_channel_%d" % i).joy_axis = RC.get_assignments()[i]
+		get_node("rx_channel_%d" % i).inverted = RC.get_inverted()[i]
+
 func setup_rc():
 	RC.set_joy_device(joy_device)
 
@@ -99,32 +110,34 @@ func setup_rc():
 	])
 
 	RC.set_settings([
-		1 if $CheckBox.pressed else 0,
-		1 if $CheckBox2.pressed else 0,
-		1 if $CheckBox3.pressed else 0,
-		1 if $CheckBox4.pressed else 0,
+		1 if $Visuals/CheckBox.pressed else 0,
+		1 if $Visuals/CheckBox2.pressed else 0,
+		1 if $Visuals/CheckBox3.pressed else 0,
+		1 if $Visuals/CheckBox4.pressed else 0,
 		1 if $CheckBox5.pressed else 0,
+		$Visuals/HSlider.value,
+		$Visuals/FOV.value,
 	])
 
 	RC.set_rates(
 		0,
-		$Rates/RatePanel/Roll/rc_rate_value.value,
-		$Rates/RatePanel/Roll/rate_value.value,
-		$Rates/RatePanel/Roll/expo_value.value
+		$Rates/ActualRatePanel/Roll/rc_rate_value.value,
+		$Rates/ActualRatePanel/Roll/rate_value.value,
+		$Rates/ActualRatePanel/Roll/expo_value.value
 	)
 
 	RC.set_rates(
 		1,
-		$Rates/RatePanel/Pitch/rc_rate_value.value,
-		$Rates/RatePanel/Pitch/rate_value.value,
-		$Rates/RatePanel/Pitch/expo_value.value
+		$Rates/ActualRatePanel/Pitch/rc_rate_value.value,
+		$Rates/ActualRatePanel/Pitch/rate_value.value,
+		$Rates/ActualRatePanel/Pitch/expo_value.value
 	)
 
 	RC.set_rates(
 		2,
-		$Rates/RatePanel/Yaw/rc_rate_value.value,
-		$Rates/RatePanel/Yaw/rate_value.value,
-		$Rates/RatePanel/Yaw/expo_value.value
+		$Rates/ActualRatePanel/Yaw/rc_rate_value.value,
+		$Rates/ActualRatePanel/Yaw/rate_value.value,
+		$Rates/ActualRatePanel/Yaw/expo_value.value
 	)
 
 func _on_Start_pressed():
@@ -155,7 +168,6 @@ func _process(_delta):
 					var resource = loader.get_resource()
 					loader = null
 					var _ok = get_tree().change_scene_to(resource)
-					get_tree().current_scene.find_node("World/QuadEntity").camera_angle = $HSlider.value
 					self.queue_free()
 					break
 				elif err == OK:
@@ -184,8 +196,71 @@ func _on_CheckBox5_toggled(_button_pressed: bool):
 
 
 func _on_HSlider_value_changed(value:float):
-	$HSlider/Label.text = String(value) + "°"
+	$Visuals/HSlider/Label.text = String(value) + "°"
 
 func _on_RichTextLabel_meta_clicked(meta):
 	if OS.get_name() == "HTML5":
 		JavaScript.eval("window.location.href = ' " + meta + " ';")
+
+
+func _on_SaveSettings_pressed():
+	if OS.is_userfs_persistent():
+		save_settings()
+		$Visuals/SettingsSavedLabel.visible = true
+	else:
+		$Visuals/SettingsSavedLabel.text = "Unable to save!"
+		$Visuals/SettingsSavedLabel.visible = true
+
+func save_settings():
+	var f = File.new()
+	f.open(settings_file, File.WRITE)
+	f.store_var($Visuals/HSlider.value)
+	f.store_var($Visuals/FOV.value)
+	f.store_var($Visuals/CheckBox.pressed)
+	f.store_var($Visuals/CheckBox2.pressed)
+	f.store_var($Visuals/CheckBox3.pressed)
+	f.store_var($Visuals/CheckBox4.pressed)
+	f.store_var($Rates/RateSelectorPanel/RatesType.selected)
+	f.store_var($Rates/ActualRatePanel/Roll/rc_rate_value.value)
+	f.store_var($Rates/ActualRatePanel/Roll/rate_value.value)
+	f.store_var($Rates/ActualRatePanel/Roll/expo_value.value)
+	f.store_var($Rates/ActualRatePanel/Pitch/rc_rate_value.value)
+	f.store_var($Rates/ActualRatePanel/Pitch/rate_value.value)
+	f.store_var($Rates/ActualRatePanel/Pitch/expo_value.value)
+	f.store_var($Rates/ActualRatePanel/Yaw/rc_rate_value.value)
+	f.store_var($Rates/ActualRatePanel/Yaw/rate_value.value)
+	f.store_var($Rates/ActualRatePanel/Yaw/expo_value.value)
+	f.store_var($CheckBox5.pressed)
+	f.store_var(RC.get_assignments())
+	f.store_var(RC.get_joy_device())
+	f.store_var(RC.get_inverted())
+
+func load_settings():
+	var f = File.new()
+	if f.file_exists(settings_file):
+		f.open(settings_file, File.READ)
+
+		$Visuals/HSlider.value = f.get_var()
+		$Visuals/FOV.value = f.get_var()
+		$Visuals/CheckBox.pressed = f.get_var()
+		$Visuals/CheckBox2.pressed = f.get_var()
+		$Visuals/CheckBox3.pressed = f.get_var()
+		$Visuals/CheckBox4.pressed = f.get_var()
+		$Rates/RateSelectorPanel/RatesType.selected = f.get_var()
+		$Rates/ActualRatePanel/Roll/rc_rate_value.value = f.get_var()
+		$Rates/ActualRatePanel/Roll/rate_value.value = f.get_var()
+		$Rates/ActualRatePanel/Roll/expo_value.value = f.get_var()
+		$Rates/ActualRatePanel/Pitch/rc_rate_value.value = f.get_var()
+		$Rates/ActualRatePanel/Pitch/rate_value.value = f.get_var()
+		$Rates/ActualRatePanel/Pitch/expo_value.value = f.get_var()
+		$Rates/ActualRatePanel/Yaw/rc_rate_value.value = f.get_var()
+		$Rates/ActualRatePanel/Yaw/rate_value.value = f.get_var()
+		$Rates/ActualRatePanel/Yaw/expo_value.value = f.get_var()
+		$CheckBox5.pressed = f.get_var()
+		RC.set_assignments(f.get_var())
+		RC.set_joy_device(f.get_var())
+		RC.set_inverted(f.get_var())
+
+		update_rc()
+
+		f.close()

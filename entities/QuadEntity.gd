@@ -16,65 +16,45 @@ var counter = 0
 
 var props = []
 
+var camera
+
+var prev_collide
+
 func _init():
 	frame = InputFrame.new();
 
 func check_settings():
-	var settings = get_node("/root/RC").get_settings()
-	if settings[0] == 0 and has_node("Camera/motion_blur"):
-		get_node("Camera/motion_blur").queue_free()
-	if settings[1] == 0 and has_node("Camera/LensFlare"):
-		get_node("Camera/LensFlare").queue_free()
+	var settings = RC.get_settings()
+	print(settings)
+	if settings[0] == 0 and has_node("Visual/Camera/motion_blur"):
+		get_node("Visual/Camera/motion_blur").queue_free()
+	if settings[1] == 0 and has_node("Visual/Camera/LensFlare"):
+		get_node("Visual/Camera/LensFlare").queue_free()
+
+func _ready():
+	camera = get_node("Visual/Camera")
+
+	var rc_camera_angle = RC.get_settings()[5]
+
+	set_camera_angle(rc_camera_angle)
 
 func _process(delta):
+	if camera:
+		camera.rotation_degrees = Vector3(camera_angle, 0, 0)
+		if camera.fov != RC.get_settings()[6]:
+			camera.fov = RC.get_settings()[6]
+
 	var prop_rotation = Vector3(0.0, deg2rad((1.0 + (frame.get_throttle() / 2.0)) * thrust) * delta, 0.0)
 
-	$PropA.rotation -= prop_rotation
-	$PropB.rotation += prop_rotation
-	$PropA2.rotation -= prop_rotation
-	$PropB2.rotation += prop_rotation
-
-	# for prop in props:
-	# 	if prop.is_in_group("ccw"):
-	# 		prop.rotation -= prop_rotation
-	# 	else:
-	# 		prop.rotation += prop_rotation
-
-	# if counter > 5:
-	# 	check_settings()
-
-	# 	counter = 0
-
-	# 	var a = get_global_transform().basis
-
-	# 	var up = a.xform(Vector3.UP)
-	# 	var thrust_force = up * thrust * pow((1.0 + frame.get_throttle()) / 2.0, thrust_curve)
-		
-		
-	# 	(get_node("Control/Speed") as Label).text = "Thrust: %1.2f, %1.2f, %1.2f (%1.2f) (N)" % [
-	# 		thrust_force.x, thrust_force.y, thrust_force.z, linear_velocity.y
-	# 	]
-
-	# 	var new_pos = global_transform.origin
-	# 	var current_distance = new_pos - old_pos
-
-	# 	var absolute_distance = current_distance.abs()
-
-	# 	var speed = absolute_distance / (10.0 * delta)
-
-	# 	var speed_mps = speed / 5.0
-	# 	var speed_kph = speed_mps * 3.6
-
-	# 	(get_node("Control/Speed2") as Label).text = "Airspeed: %1.0f km/h" % speed_kph.length()
-
-	# 	old_pos = new_pos
-
-	# counter += 1
-	
+	$Visual/PropA.rotation -= prop_rotation
+	$Visual/PropB.rotation += prop_rotation
+	$Visual/PropA2.rotation -= prop_rotation
+	$Visual/PropB2.rotation += prop_rotation
 
 func set_camera_angle(val):
 	camera_angle = val
-	get_node("Camera").rotation_degrees = Vector3(camera_angle, 0, 0)
+
+	check_settings()
 
 func get_camera_angle():
 	return camera_angle
@@ -94,18 +74,18 @@ func _integrate_forces(state):
 		state.set_angular_velocity(a.xform(av) / 10.0)
 
 		var up = a.xform(Vector3.UP)
+		var modified_thrust = thrust * self.gravity_scale
 		var thrust_force
 		# transform = transform.orthonormalized()
 		if RC.get_settings()[4] == 1:
 			var throt = frame.get_throttle() if frame.get_throttle() > 0.0 else 0.0
-			thrust_force = up * thrust * pow(throt, thrust_curve)
+			thrust_force = up * modified_thrust * pow(throt, thrust_curve)
 		else:
-			thrust_force = up * thrust * pow((1.0 + frame.get_throttle()) / 2.0, thrust_curve)
+			thrust_force = up * modified_thrust * pow((1.0 + frame.get_throttle()) / 2.0, thrust_curve)
 
-		# var yaw_thrust = up * abs(frame.calculate_yaw(0.05) * thrust * 0.002)
-
-		# if frame.get_throttle() < -0.9 && linear_velocity.y:
-		# 	thrust_force.y = 
+		var yaw_thrust = up * abs((frame.calculate_yaw() * 0.01) * modified_thrust * 0.002)
+		
+		thrust_force += yaw_thrust
 		
 		var motors = [
 			Vector3(1.0, 0.0, 1.0),
@@ -120,12 +100,19 @@ func _integrate_forces(state):
 			1.0, 1.0, 1.0, 1.0
 		]
 
-		# if thrust_force.length() != INF:
-		# state.add_central_force((thrust_force + yaw_thrust))
+		var motor_force_modifier = 1.5
+
+		total_thrust *= motor_force_modifier
+
 		state.add_force(motor_force[0] * total_thrust, motors[0])
 		state.add_force(motor_force[1] * total_thrust, motors[1])
 		state.add_force(motor_force[2] * total_thrust, motors[2])
 		state.add_force(motor_force[3] * total_thrust, motors[3])
-		# 	pass
-		
+
+		var lvy = state.linear_velocity.y
+		state.linear_velocity *= pow(1 - 0.6, state.step)
+
+		if state.linear_velocity.y < 0:
+			state.linear_velocity.y = lvy # don't damp gravity
+
 		state.integrate_forces()

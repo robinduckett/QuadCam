@@ -1,3 +1,5 @@
+extends Reference
+
 var thread
 var mutex
 var sem

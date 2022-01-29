@@ -1,0 +1,160 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://models/gates/Gate_5x5_Left_Side.png" type="Texture" id=1]
+[ext_resource path="res://models/gates/Gate_5x5_Right_Side.png" type="Texture" id=2]
+[ext_resource path="res://models/gates/Gate_Top_7x6.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="ArrayMesh" id=1]
+resource_name = "all_ID144"
+surfaces/0 = {
+"aabb": AABB( 0, 72, 0, 120, 24, 1e-05 ),
+"array_data": PoolByteArray( 5, 0, 240, 43, 0, 0, 192, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 240, 66, 0, 0, 192, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 144, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 144, 65, 0, 0, 144, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 204, 66, 0, 0, 144, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 240, 66, 0, 0, 144, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 2, 0, 3, 0, 1, 0, 3, 0, 4, 0, 1, 0, 5, 0, 1, 0, 4, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 12,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 6
+}
+surfaces/1 = {
+"aabb": AABB( 0, 72, 0, 120, 24, 1e-05 ),
+"array_data": PoolByteArray( 0, 0, 240, 66, 0, 0, 192, 66, 0, 0, 0, 128, 0, 0, 127, 63, 0, 70, 0, 194, 0, 0, 204, 66, 0, 0, 144, 66, 0, 0, 0, 128, 0, 0, 127, 63, 217, 69, 0, 192, 0, 0, 240, 66, 0, 0, 144, 66, 0, 0, 0, 128, 0, 0, 127, 63, 0, 70, 0, 192, 0, 0, 144, 65, 0, 0, 144, 66, 0, 0, 0, 128, 0, 0, 127, 63, 38, 69, 0, 192, 0, 0, 0, 0, 0, 0, 144, 66, 0, 0, 0, 128, 0, 0, 127, 63, 0, 69, 0, 192, 5, 0, 240, 43, 0, 0, 192, 66, 0, 0, 0, 128, 0, 0, 127, 63, 0, 69, 0, 194 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 1, 0, 3, 0, 0, 0, 3, 0, 4, 0, 0, 0, 4, 0, 5, 0, 0, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 12,
+"material": SubResource( 9 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 6
+}
+
+[sub_resource type="ConcavePolygonShape" id=4]
+data = PoolVector3Array( 0, 96, 0, 0, 72, 0, 120, 96, 0, 0, 72, 0, 18, 72, 0, 120, 96, 0, 18, 72, 0, 102, 72, 0, 120, 96, 0, 120, 72, 0, 120, 96, 0, 102, 72, 0, 120, 96, 0, 120, 72, 0, 102, 72, 0, 102, 72, 0, 18, 72, 0, 120, 96, 0, 18, 72, 0, 0, 72, 0, 120, 96, 0, 0, 72, 0, 0, 96, 0, 120, 96, 0 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="ArrayMesh" id=2]
+resource_name = "all_ID159"
+surfaces/0 = {
+"aabb": AABB( 102, -1.61559e-27, 0, 18, 72, 1e-05 ),
+"array_data": PoolByteArray( 0, 0, 204, 66, 0, 0, 144, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 240, 66, 0, 0, 144, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 204, 66, 255, 255, 255, 146, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 240, 66, 255, 255, 255, 146, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 6,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+surfaces/1 = {
+"aabb": AABB( 102, -1.61559e-27, 0, 18, 72, 1e-05 ),
+"array_data": PoolByteArray( 0, 0, 240, 66, 0, 0, 144, 66, 0, 0, 0, 128, 0, 0, 129, 63, 32, 81, 0, 64, 0, 0, 204, 66, 255, 255, 255, 146, 0, 0, 0, 128, 0, 0, 129, 63, 64, 81, 0, 60, 0, 0, 240, 66, 255, 255, 255, 146, 0, 0, 0, 128, 0, 0, 129, 63, 32, 81, 0, 60, 0, 0, 204, 66, 0, 0, 144, 66, 0, 0, 0, 128, 0, 0, 129, 63, 64, 81, 0, 64 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 1, 0, 3, 0, 0, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 6,
+"material": SubResource( 8 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="ConcavePolygonShape" id=5]
+data = PoolVector3Array( 102, 72, 0, 102, 0, 0, 120, 72, 0, 120, 0, 0, 120, 72, 0, 102, 0, 0, 120, 72, 0, 120, 0, 0, 102, 0, 0, 102, 0, 0, 102, 72, 0, 120, 72, 0 )
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="ArrayMesh" id=3]
+resource_name = "all_ID174"
+surfaces/0 = {
+"aabb": AABB( 0, 4.26326e-14, 0, 18, 72, 1e-05 ),
+"array_data": PoolByteArray( 0, 0, 0, 0, 0, 0, 144, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 144, 65, 0, 0, 144, 66, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 0, 0, 254, 255, 63, 41, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60, 0, 0, 144, 65, 254, 255, 63, 41, 0, 0, 0, 128, 127, 127, 127, 63, 0, 0, 0, 60 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 6,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+surfaces/1 = {
+"aabb": AABB( 0, 4.26326e-14, 0, 18, 72, 1e-05 ),
+"array_data": PoolByteArray( 0, 0, 144, 65, 0, 0, 144, 66, 0, 0, 0, 128, 0, 0, 127, 63, 160, 80, 0, 0, 0, 0, 0, 0, 254, 255, 63, 41, 0, 0, 0, 128, 0, 0, 127, 63, 128, 80, 0, 60, 0, 0, 144, 65, 254, 255, 63, 41, 0, 0, 0, 128, 0, 0, 127, 63, 160, 80, 0, 60, 0, 0, 0, 0, 0, 0, 144, 66, 0, 0, 0, 128, 0, 0, 127, 63, 128, 80, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 1, 0, 3, 0, 0, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 6,
+"material": SubResource( 10 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="ConcavePolygonShape" id=6]
+data = PoolVector3Array( 0, 72, 0, 0, 0, 0, 18, 72, 0, 18, 0, 0, 18, 72, 0, 0, 0, 0, 18, 72, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 18, 72, 0 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Sketchup" type="Spatial" parent="."]
+transform = Transform( 0.064, 0, 0, 0, 0.064, 0, 0, 0, 0.064, 0, 0, 0 )
+
+[node name="instance_26" type="MeshInstance" parent="Sketchup"]
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = null
+material/1 = null
+
+[node name="StaticBody" type="StaticBody" parent="Sketchup/instance_26"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Sketchup/instance_26/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="instance_26001" type="MeshInstance" parent="Sketchup"]
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+material/0 = null
+material/1 = null
+
+[node name="StaticBody" type="StaticBody" parent="Sketchup/instance_26001"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Sketchup/instance_26001/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="instance_26002" type="MeshInstance" parent="Sketchup"]
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = null
+material/1 = null
+
+[node name="StaticBody" type="StaticBody" parent="Sketchup/instance_26002"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Sketchup/instance_26002/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Sketchup2" type="Spatial" parent="."]
+transform = Transform( -0.064, 0, -5.59506e-09, 0, 0.064, 0, 5.59506e-09, 0, -0.064, 7.677, 0, -0.1 )
+
+[node name="instance_26" type="MeshInstance" parent="Sketchup2"]
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = null
+material/1 = null
+
+[node name="instance_26001" type="MeshInstance" parent="Sketchup2"]
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+material/0 = null
+material/1 = null
+
+[node name="instance_26002" type="MeshInstance" parent="Sketchup2"]
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = null
+material/1 = null

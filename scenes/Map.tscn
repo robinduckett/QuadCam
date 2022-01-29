@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://levels/ParkLevel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/QuadEntity.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/World.gd" type="Script" id=21]
+[ext_resource path="res://scenes/Map.gd" type="Script" id=22]
+
+[node name="Map" type="Node"]
+script = ExtResource( 22 )
+
+[node name="World" type="Spatial" parent="."]
+script = ExtResource( 21 )
+
+[node name="Scene" type="Spatial" parent="World"]
+
+[node name="CurrentLevel" parent="World/Scene" instance=ExtResource( 2 )]
+
+[node name="Quads" type="Spatial" parent="World"]
+
+[node name="QuadEntity" parent="World/Quads" instance=ExtResource( 18 )]
+transform = Transform( 0.974238, 0.0489876, 0.220139, -0.0405178, 0.99826, -0.0428296, -0.221854, 0.0328067, 0.974528, 202.511, 34.2688, 292.288 )
