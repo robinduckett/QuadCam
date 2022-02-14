@@ -17,6 +17,9 @@ var counter = 0
 var props = []
 
 var camera
+var camera2
+
+var visual
 
 var prev_collide
 
@@ -33,23 +36,34 @@ func check_settings():
 
 func _ready():
 	camera = get_node("Visual/Camera")
+	camera2 = get_parent().get_parent().get_node("Viewport/QuadEntity/Visual/Camera")
+	visual = get_parent().get_parent().get_node("Viewport/QuadEntity")
 
 	var rc_camera_angle = RC.get_settings()[5]
 
 	set_camera_angle(rc_camera_angle)
 
+	props.push_back(get_parent().get_parent().get_node("Viewport/QuadEntity/Visual/PropA"))
+	props.push_back(get_parent().get_parent().get_node("Viewport/QuadEntity/Visual/PropB"))
+	props.push_back(get_parent().get_parent().get_node("Viewport/QuadEntity/Visual/PropA2"))
+	props.push_back(get_parent().get_parent().get_node("Viewport/QuadEntity/Visual/PropB2"))
+
 func _process(delta):
 	if camera:
 		camera.rotation_degrees = Vector3(camera_angle, 0, 0)
+		camera2.rotation_degrees = camera.rotation_degrees
 		if camera.fov != RC.get_settings()[6]:
 			camera.fov = RC.get_settings()[6]
+			camera2.fov = camera.fov
 
 	var prop_rotation = Vector3(0.0, deg2rad((1.0 + (frame.get_throttle() / 2.0)) * thrust) * delta, 0.0)
 
-	$Visual/PropA.rotation -= prop_rotation
-	$Visual/PropB.rotation += prop_rotation
-	$Visual/PropA2.rotation -= prop_rotation
-	$Visual/PropB2.rotation += prop_rotation
+	props[0].rotation -= prop_rotation
+	props[1].rotation += prop_rotation
+	props[2].rotation -= prop_rotation
+	props[3].rotation += prop_rotation
+
+	visual.global_transform = get_global_transform()
 
 func set_camera_angle(val):
 	camera_angle = val

@@ -7,11 +7,6 @@
 [ext_resource path="res://entities/quads/tbs-source-one/QuadEntity.mesh" type="ArrayMesh" id=5]
 [ext_resource path="res://entities/quads/tbs-source-one/prop-material.tres" type="Material" id=9]
 
-[sub_resource type="PhysicsMaterial" id=2]
-friction = 0.5
-rough = true
-bounce = 0.1
-
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "prop1_Cylinder"
 surfaces/0 = {
@@ -39,6 +34,11 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 3840
 }
+
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.5
+rough = true
+bounce = 0.1
 
 [sub_resource type="ConvexPolygonShape" id=13]
 points = PoolVector3Array( 4.65472, 3.71424, -6.79567, -1.03358, -13.3721, -1.6947, -4.67188, 5.89342, -6.20653, 1.33112, 8.34222, 1.41238, -5.83112, -1.5054, -6.34596, 4.91224, -1.5054, -7.39152, 1.12166, -13.0413, 1.59781, -4.53724, 5.91426, 5.1667, 4.91224, 6.10256, 4.84336, -5.83112, -1.50755, 5.29223, 5.80894, -1.50755, 5.29223, 4.66762, 5.92406, -6.22705, 5.80894, -1.5054, -6.34462, -5.08481, -1.5054, -7.241, -1.35329, 8.34222, -1.42056, -4.78629, -1.50755, 6.33778, 4.91224, -1.50755, 6.33778, -1.03765, -13.4149, 1.67402, 1.12166, -13.0413, -1.65875, -5.23407, 3.8629, 4.54502, 1.33112, 8.34222, -1.86942, -4.33851, 6.10256, -6.34596, 4.95074, 3.71979, 5.60154, 5.36116, 3.8629, 4.54502, 5.22458, 3.69927, -6.34333, -4.53049, 3.71658, -6.79799, -1.35329, 8.34222, 1.41238, -5.12131, 3.72418, -6.36623, -4.82409, 3.7175, 5.59933, -1.14519, 7.80117, -3.22262, 4.65625, 5.90538, 5.16078, -5.08481, -1.50755, 6.18727, 0.980471, 7.79439, 2.30759, 5.23717, 3.71314, 5.30234, -5.10887, 3.70734, 5.29702, -4.95928, 3.55786, -6.63844, 4.96137, 3.73625, -6.67117, -1.02417, -13.1273, 1.78993 )
@@ -120,7 +120,82 @@ points = PoolVector3Array( -3.44341, -1.50671, -5.74997, -1.26991, -1.3935, -2.8
 
 [node name="Spatial" type="Spatial"]
 
-[node name="QuadEntity" type="RigidBody" parent="."]
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="QuadEntity" type="Spatial" parent="Viewport"]
+process_priority = -1
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19049, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Visual" type="Spatial" parent="Viewport/QuadEntity"]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.116638, 0 )
+
+[node name="Drone" type="MeshInstance" parent="Viewport/QuadEntity/Visual"]
+transform = Transform( 0.154025, 0, 0, 0, 0.0216838, 0, 0, 0, 0.154025, 0, 0.0501195, 0 )
+layers = 524288
+mesh = ExtResource( 5 )
+skeleton = NodePath("")
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+
+[node name="PropA" type="MeshInstance" parent="Viewport/QuadEntity/Visual"]
+transform = Transform( 0.06, 0, 0, 0, -0.03, -9.05975e-09, 0, 4.52987e-09, -0.06, -0.69755, 0.163246, 0.769364 )
+layers = 524288
+material_override = ExtResource( 9 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="PropA2" type="MeshInstance" parent="Viewport/QuadEntity/Visual"]
+transform = Transform( 0.06, 0, 0, 0, -0.03, -9.05975e-09, 0, 4.52987e-09, -0.06, 0.699222, 0.163246, -0.93973 )
+layers = 524288
+material_override = ExtResource( 9 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="PropB" type="MeshInstance" parent="Viewport/QuadEntity/Visual"]
+transform = Transform( -0.06, 0, 0, 0, 0.03, 9.05975e-09, 0, -4.52987e-09, 0.06, 0.709447, 0.163, 0.768804 )
+layers = 524288
+material_override = ExtResource( 9 )
+mesh = SubResource( 10 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="PropB2" type="MeshInstance" parent="Viewport/QuadEntity/Visual"]
+transform = Transform( -0.06, 0, 0, 0, 0.03, 9.05975e-09, 0, -4.52987e-09, 0.06, -0.695969, 0.163, -0.940538 )
+layers = 524288
+material_override = ExtResource( 9 )
+mesh = SubResource( 10 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Camera" type="Camera" parent="Viewport/QuadEntity/Visual"]
+transform = Transform( 3.33333, 0, 0, 0, 2.73051, -1.91192, 0, 1.91192, 2.73051, 0, 0.186931, -0.56594 )
+cull_mask = 524288
+current = true
+fov = 100.7
+near = 0.01
+far = 10000.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ViewportQuad" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+render_target_v_flip = true
+
+[node name="QuadEntity" type="RigidBody" parent="ViewportQuad"]
+process_priority = -1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19049, 0 )
 mass = 45.0
 physics_material_override = SubResource( 2 )
@@ -137,58 +212,21 @@ camera_angle = 45
 thrust = 1800.0
 thrust_curve = 1.0
 
-[node name="Visual" type="Spatial" parent="QuadEntity"]
+[node name="Visual" type="Spatial" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.116638, 0 )
 
-[node name="Drone" type="MeshInstance" parent="QuadEntity/Visual"]
-transform = Transform( 0.154025, 0, 0, 0, 0.0216838, 0, 0, 0, 0.154025, 0, 0.0501195, 0 )
-mesh = ExtResource( 5 )
-skeleton = NodePath("")
-material/0 = null
-material/1 = null
-material/2 = null
-material/3 = null
-material/4 = null
-material/5 = null
-
-[node name="PropA" type="MeshInstance" parent="QuadEntity/Visual"]
-transform = Transform( 0.06, 0, 0, 0, -0.03, -9.05975e-09, 0, 4.52987e-09, -0.06, -0.69755, 0.163246, 0.769364 )
-material_override = ExtResource( 9 )
-mesh = SubResource( 1 )
-skeleton = NodePath("")
-material/0 = null
-
-[node name="PropA2" type="MeshInstance" parent="QuadEntity/Visual"]
-transform = Transform( 0.06, 0, 0, 0, -0.03, -9.05975e-09, 0, 4.52987e-09, -0.06, 0.699222, 0.163246, -0.93973 )
-material_override = ExtResource( 9 )
-mesh = SubResource( 1 )
-skeleton = NodePath("")
-material/0 = null
-
-[node name="PropB" type="MeshInstance" parent="QuadEntity/Visual"]
-transform = Transform( -0.06, 0, 0, 0, 0.03, 9.05975e-09, 0, -4.52987e-09, 0.06, 0.709447, 0.163, 0.768804 )
-material_override = ExtResource( 9 )
-mesh = SubResource( 10 )
-skeleton = NodePath("")
-material/0 = null
-
-[node name="PropB2" type="MeshInstance" parent="QuadEntity/Visual"]
-transform = Transform( -0.06, 0, 0, 0, 0.03, 9.05975e-09, 0, -4.52987e-09, 0.06, -0.695969, 0.163, -0.940538 )
-material_override = ExtResource( 9 )
-mesh = SubResource( 10 )
-skeleton = NodePath("")
-material/0 = null
-
-[node name="Camera" type="Camera" parent="QuadEntity/Visual"]
-transform = Transform( 1, 0, 0, 0, 0.819152, -0.573577, 0, 0.573577, 0.819152, 0, 0.186931, -0.56594 )
+[node name="Camera" type="Camera" parent="ViewportQuad/QuadEntity/Visual"]
+transform = Transform( 3.33333, 0, 0, 0, 2.73051, -1.91192, 0, 1.91192, 2.73051, 0, 0.186931, -0.56594 )
+cull_mask = 524287
+current = true
 fov = 100.7
 near = 0.01
 far = 10000.0
 
-[node name="motion_blur" parent="QuadEntity/Visual/Camera" instance=ExtResource( 2 )]
+[node name="motion_blur" parent="ViewportQuad/QuadEntity/Visual/Camera" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, -5.96046e-08, -2 )
 
-[node name="LensFlare" type="Node" parent="QuadEntity/Visual/Camera"]
+[node name="LensFlare" type="Node" parent="ViewportQuad/QuadEntity/Visual/Camera"]
 script = ExtResource( 4 )
 flare_strength = 0.2
 flare_bias = 0.5
@@ -202,108 +240,108 @@ streak_strength = 0.5
 screen_size = Vector2( 1024, 600 )
 lens_dirt = ExtResource( 3 )
 
-[node name="CollisionShape" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.154025, 0, 0, 0, 0.0216838, 0, 0, 0, 0.154025, 0, -0.0665186, 0 )
 visible = false
 shape = SubResource( 13 )
 disabled = true
 
-[node name="CollisionShape25" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape25" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 14 )
 
-[node name="CollisionShape24" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape24" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 15 )
 
-[node name="CollisionShape23" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape23" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 16 )
 
-[node name="CollisionShape22" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape22" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 17 )
 
-[node name="CollisionShape21" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape21" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 18 )
 
-[node name="CollisionShape20" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape20" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 19 )
 
-[node name="CollisionShape19" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape19" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 20 )
 
-[node name="CollisionShape18" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape18" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 21 )
 
-[node name="CollisionShape17" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape17" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 22 )
 
-[node name="CollisionShape16" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape16" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 23 )
 
-[node name="CollisionShape15" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape15" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 24 )
 
-[node name="CollisionShape14" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape14" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 25 )
 
-[node name="CollisionShape13" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape13" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 26 )
 
-[node name="CollisionShape12" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape12" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 27 )
 
-[node name="CollisionShape11" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape11" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 28 )
 
-[node name="CollisionShape10" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape10" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 29 )
 
-[node name="CollisionShape9" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape9" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 30 )
 
-[node name="CollisionShape8" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape8" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 31 )
 
-[node name="CollisionShape7" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape7" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 32 )
 
-[node name="CollisionShape6" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape6" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 33 )
 
-[node name="CollisionShape5" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape5" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 34 )
 
-[node name="CollisionShape4" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape4" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 35 )
 
-[node name="CollisionShape3" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape3" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 36 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape2" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 37 )
 
-[node name="CollisionShape26" type="CollisionShape" parent="QuadEntity"]
+[node name="CollisionShape26" type="CollisionShape" parent="ViewportQuad/QuadEntity"]
 transform = Transform( 0.0462075, 0, 0, 0, 0.00650514, 0, 0, 0, 0.0462075, 0, -0.101602, 0 )
 shape = SubResource( 38 )

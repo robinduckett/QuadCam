@@ -15,5 +15,7 @@ func shift_origin() -> void:
 func _process(_delta: float) -> void:
 	# Set the camera to check to be the current camera
 	# Check distance of world from camera and shift if greater than threshold
-	if(camera.global_transform.origin.length() > threshold && camera != null):
-		shift_origin()
+	# if(camera.global_transform.origin.length() > threshold && camera != null):
+	# 	shift_origin()
+
+	pass

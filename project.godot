@@ -173,6 +173,13 @@ config/icon="res://icon.png"
 RC="*res://flight/RC.gd"
 DebugDraw="*res://addons/zylann.debug_draw/debug_draw.gd"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=1920
+window/size/test_height=1080
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/measuring_tape/plugin.cfg", "res://addons/silicon.vfx.lens_flare/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
